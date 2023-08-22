@@ -2,12 +2,22 @@ class User{
     constructor(name, email, birthdate, address, phone, cpf, error, success){
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate.split('-').reverse().join('/');
+        this.birthdate = birthdate; //.split('-').reverse().join('/');//
         this.address = address;
         this.phone = phone;
         this.cpf = cpf;
-        this.error = error
+        this.error = error;
         this.success = success;
+        // this.age = this.calculateAge();
+        this.zodiacSign = this.getZodiacSign();
+        this.countUsers = this.countUsers();
+    }
+    // calculateAge(){
+
+    // }
+    countUsers(){
+         User.length
+
     }
 
     getZodiacSign(){
@@ -45,17 +55,29 @@ class User{
 }
 class ListUser {
     constructor(){
-        const infos = [];
+         this.infos = [];
     }
-    add(User){
-    this.infos.push(user);
+    add(user){
+         if(isAnyInputEmpty == true){
+             sendErrorMsg("Preencha todos os campos!");
+         } else if(!valida_cpf(user.cpf) == false){
+             sendErrorMsg("CPF inválido!");
+         } else if(isUserAlreadyRegistered(user.cpf) == false){
+             sendErrorMsg("CPF já cadastrado!");
+         } else{
+             sendsuccessMsg("Parabéns! Você foi cadstrado com sucesso.");
+             
+         }
+    // this.infos.push(user);
     }
+
+    
+
+    
 }
-
-
- const listPeople = new ListUser();
-
 function createUser(){
+    const lista = new ListUser();
+
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const birthdate = document.getElementById("birthdate").value;
@@ -63,9 +85,10 @@ function createUser(){
     const phone = document.getElementById("phone").value;
     const cpf = document.getElementById("cpf").value;
 
-    const person = new User (name, email, birthdate, address, phone, cpf);
-    listPeople.add(User);
+    const people = new User (name, email, birthdate, address, phone, cpf);
+    lista.add(people);
 
+    
     console.log(name);
     console.log(email);
     console.log(birthdate);
@@ -74,13 +97,12 @@ function createUser(){
     console.log(cpf);
 
     clearInputs();
-    showUsers();
 }
 
 function showUsers(){
     
     let html = "";
-    listPeople.infos.forEach(User => {
+    lista.infos.forEach(User => {
         html +`
         <div>
         <p>Id: ${User.name}</p>
@@ -92,14 +114,15 @@ function showUsers(){
         </div>
         `
     });
+
     document.getElementsByClassName("logo").innerHTML = html;
 }
 
-// function dateinPTBR(date){
-//     let data = document.getElementById("birthdate").value;
-//     const veri = data.split('-').reverse().join('/');
-//     console.log(veri);
-// }
+ function dateinPTBR(date){
+     let data = document.getElementById("birthdate").value;
+     const verify = data.split('-').reverse().join('/');
+     console.log(verify);
+ }
 
 
 
@@ -170,7 +193,6 @@ function valida_cpf(cpf) {
         return false;
 }
 
-
 function sendErrorMsg(msg) {
     console.log("Passou pela funcao sendErrorMsg()");
 
@@ -201,5 +223,20 @@ function clearInputs(){
 }
 
 function isAnyInputEmpty(){
+    name = document.getElementById("name").value;
+    email = document.getElementById("email").value;
+    birthdate = document.getElementById("birthdate").value;
+    address = document.getElementById("address").value;
+    phone = document.getElementById("phone").value;
+    cpf = document.getElementById("cpf").value;
+
+    if(name == "" || email == "" || birthdate == "" || address == "" || phone == "" || cpf == ""){
+        return false;
+    } else {
+        return true;
+    }
 }
 
+function isUserAlreadyRegistered(cpf){
+
+}
