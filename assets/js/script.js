@@ -2,7 +2,7 @@ class User{
     constructor(name, email, birthdate, address, phone, cpf, error, success){
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate;
+        this.birthdate = birthdate.split('-').reverse().join('/');
         this.address = address;
         this.phone = phone;
         this.cpf = cpf;
@@ -48,12 +48,12 @@ class ListUser {
         const infos = [];
     }
     add(User){
-    this.infos.push(User);
+    this.infos.push(user);
     }
 }
 
 
- const listPeople = new ListPeople();
+ const listPeople = new ListUser();
 
 function createUser(){
     const name = document.getElementById("name").value;
@@ -62,27 +62,45 @@ function createUser(){
     const address = document.getElementById("address").value;
     const phone = document.getElementById("phone").value;
     const cpf = document.getElementById("cpf").value;
-    const error = document.getElementById("error-msg").value;
-    const success = document.getElementById("success-msg").value;
 
-    const person = new Person (name, email, birthdate, address, phone, cpf);
-    listPeople.add(person);
+    const person = new User (name, email, birthdate, address, phone, cpf);
+    listPeople.add(User);
+
+    console.log(name);
+    console.log(email);
+    console.log(birthdate);
+    console.log(address);
+    console.log(phone);
+    console.log(cpf);
 
     clearInputs();
-    console.log(createUser);
+    showUsers();
 }
 
-
-function dateinPTBR(date){
-    var date = new Date();
-        day = date.getDate().toString();
-        days = (day.length == 1) ? '0'+day : day;
-        mounth = (date.getMonth()+1).toString();
-        mounths = (mounth.length == 1) ? '0'+mounth: mounth;
-        year = date.getFullYear();
-        return days+"/"+mounths+"/"+year;
-
+function showUsers(){
+    
+    let html = "";
+    listPeople.infos.forEach(User => {
+        html +`
+        <div>
+        <p>Id: ${User.name}</p>
+        <p>Id: ${User.email}</p>
+        <p>Id: ${User.birthdate}</p>
+        <p>Id: ${User.address}</p>
+        <p>Id: ${User.phone}</p>
+        <p>Id: ${User.cpf}</p>
+        </div>
+        `
+    });
+    document.getElementsByClassName("logo").innerHTML = html;
 }
+
+// function dateinPTBR(date){
+//     let data = document.getElementById("birthdate").value;
+//     const veri = data.split('-').reverse().join('/');
+//     console.log(veri);
+// }
+
 
 
 function showRegister() {
@@ -181,3 +199,7 @@ function clearInputs(){
     document.getElementById("phone").value = "";
     document.getElementById("cpf").value = "";
 }
+
+function isAnyInputEmpty(){
+}
+
