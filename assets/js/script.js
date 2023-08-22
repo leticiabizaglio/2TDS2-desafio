@@ -1,36 +1,89 @@
-/*
-getZodiacSign() {
-    let birthdate = new Date(this.birthdate);
-    let day = birthdate.getDate();
-    let month = birthdate.getMonth() + 1;
-    console.log("Passou pelo getSigno() da class User");
+class User{
+    constructor(name, email, birthdate, address, phone, cpf, error, success){
+        this.name = name;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.address = address;
+        this.phone = phone;
+        this.cpf = cpf;
+        this.error = error
+        this.success = success;
+    }
 
-    if ((month == 1 && day <= 20) || (month == 12 && day >= 22)) {
-        return "Capricórnio ♑";
-    } else if ((month == 1 && day >= 21) || (month == 2 && day <= 18)) {
-        return "Aquário ♒";
-    } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
-        return "Peixes ♓";
-    } else if ((month == 3 && day >= 21) || (month == 4 && day <= 20)) {
-        return "Áries ♈";
-    } else if ((month == 4 && day >= 21) || (month == 5 && day <= 20)) {
-        return "Touro ♉";
-    } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
-        return "Gêmeos ♊";
-    } else if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
-        return "Câncer ♋";
-    } else if ((month == 7 && day >= 23) || (month == 8 && day <= 23)) {
-        return "Leão ♌";
-    } else if ((month == 8 && day >= 24) || (month == 9 && day <= 23)) {
-        return "Virgem ♍";
-    } else if ((month == 9 && day >= 24) || (month == 10 && day <= 23)) {
-        return "Libra ♎";
-    } else if ((month == 10 && day >= 24) || (month == 11 && day <= 22)) {
-        return "Escorpião ♏";
-    } else if ((month == 11 && day >= 23) || (month == 12 && day <= 21)) {
-        return "Sagitário ♐";
+    getZodiacSign(){
+        let birthdate = new Date(this.birthdate);
+        let day = birthdate.getDate();
+        let month = birthdate.getMonth() + 1;
+        console.log("Passou pelo getSigno() da class User");
+
+        if ((month == 1 && day <= 20) || (month == 12 && day >= 22)) {
+            return "Capricórnio ♑";
+        } else if ((month == 1 && day >= 21) || (month == 2 && day <= 18)) {
+            return "Aquário ♒";
+        } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+            return "Peixes ♓";
+        } else if ((month == 3 && day >= 21) || (month == 4 && day <= 20)) {
+            return "Áries ♈";
+        } else if ((month == 4 && day >= 21) || (month == 5 && day <= 20)) {
+            return "Touro ♉";
+        } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+            return "Gêmeos ♊";
+        } else if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
+            return "Câncer ♋";
+        } else if ((month == 7 && day >= 23) || (month == 8 && day <= 23)) {
+            return "Leão ♌";
+        } else if ((month == 8 && day >= 24) || (month == 9 && day <= 23)) {
+            return "Virgem ♍";
+        } else if ((month == 9 && day >= 24) || (month == 10 && day <= 23)) {
+            return "Libra ♎";
+        } else if ((month == 10 && day >= 24) || (month == 11 && day <= 22)) {
+            return "Escorpião ♏";
+        } else if ((month == 11 && day >= 23) || (month == 12 && day <= 21)) {
+            return "Sagitário ♐";
+        }
     }
 }
+class ListUser {
+    constructor(){
+        const infos = [];
+    }
+    add(User){
+    this.infos.push(User);
+    }
+}
+
+
+ const listPeople = new ListPeople();
+
+function createUser(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const birthdate = document.getElementById("birthdate").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
+    const cpf = document.getElementById("cpf").value;
+    const error = document.getElementById("error-msg").value;
+    const success = document.getElementById("success-msg").value;
+
+    const person = new Person (name, email, birthdate, address, phone, cpf);
+    listPeople.add(person);
+
+    clearInputs();
+    console.log(createUser);
+}
+
+
+function dateinPTBR(date){
+    var date = new Date();
+        day = date.getDate().toString();
+        days = (day.length == 1) ? '0'+day : day;
+        mounth = (date.getMonth()+1).toString();
+        mounths = (mounth.length == 1) ? '0'+mounth: mounth;
+        year = date.getFullYear();
+        return days+"/"+mounths+"/"+year;
+
+}
+
 
 function showRegister() {
     document.getElementById("sub-div").classList.add("hidden");
@@ -39,6 +92,7 @@ function showRegister() {
     console.log("Passou pela funcao showRegister()");
 
 }
+
 
 function formatedCPF(cpf) {
     console.log("Passou pela funcao formatedCPF()");
@@ -49,6 +103,7 @@ function formatedCPF(cpf) {
         + cpfArray[6] + cpfArray[7] + cpfArray[8] + "-" + cpfArray[9] + cpfArray[10];
     return cpfFormated;
 }
+
 
 function formatedCellphone(cellphone) {
     console.log("Passou pela funcao formatedCellphone()");
@@ -61,6 +116,7 @@ function formatedCellphone(cellphone) {
         + cellphoneArray[9] + cellphoneArray[10];
     return cellphoneFormated;
 }
+
 
 function valida_cpf(cpf) {
     console.log("Passou pela funcao valida_cpf()");
@@ -96,6 +152,7 @@ function valida_cpf(cpf) {
         return false;
 }
 
+
 function sendErrorMsg(msg) {
     console.log("Passou pela funcao sendErrorMsg()");
 
@@ -106,4 +163,21 @@ function sendErrorMsg(msg) {
     }, 4000);
 }
 
-*/
+
+function sendsuccessMsg(msg){
+    document.getElementById("success-msg").innerHTML = msg;
+    document.getElementById("success-msg").classList.remove("success-msg");
+    setTimeout(function (){
+        document.getElementById("success-msg").classList.add("hidden");
+    }, 4000)
+}
+
+
+function clearInputs(){
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("birthdate").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("cpf").value = "";
+}
